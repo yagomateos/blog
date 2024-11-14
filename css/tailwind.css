@@ -105,3 +105,8 @@ p.mt-8.text-center.text-lg.text-gray-500.dark\:text-gray-400.font-light.tracking
   --tw-bg-opacity: 1;
   background-color: #0e5a51 !important;
 }
+
+.h-6.text-3xl.font-semibold.sm\:block {
+  color: #178C7E ;
+  position: absolute ;
+}
