@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -6,20 +7,20 @@ import NewsletterForm from 'pliny/ui/NewsletterForm'
 const MAX_DISPLAY = 5
 
 // Fecha de los posts
-const formatDate = (date) => {
-  const options = {
+const formatDate = (date: Date) => {
+  const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }
+  };
+
   try {
-    // Usar new Date() para obtener la fecha actual
-    return new Date().toLocaleDateString('es-ES', options)
+    return new Date(date).toLocaleDateString('es-ES', options);
   } catch (error) {
-    console.error('Error al formatear la fecha:', error)
-    return date
+    console.error('Error al formatear la fecha:', error);
+    return date.toString();
   }
-}
+};
 
 export default function Home({ posts }) {
   return (
@@ -64,8 +65,7 @@ export default function Home({ posts }) {
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
+                      <time dateTime={date}>{formatDate(date)}</time>                      </dd>
                     </dl>
                     <div className="space-y-5 xl:col-span-3">
                       <div className="space-y-6">

@@ -1,4 +1,5 @@
 // ./app/catalogo/page.tsx
+import Image from 'next/image'
 
 interface VintageItem {
   name: string;

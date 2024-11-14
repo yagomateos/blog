@@ -1,5 +1,6 @@
 // ./app/marcas/page.tsx
 
+import Image from 'next/image'
 interface VintageBrand {
   name: string
   description: string
