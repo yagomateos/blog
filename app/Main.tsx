@@ -1,23 +1,58 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 
 const MAX_DISPLAY = 5
+
+// Fecha de los posts
+const formatDate = (date) => {
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  try {
+    // Usar new Date() para obtener la fecha actual
+    return new Date().toLocaleDateString('es-ES', options)
+  } catch (error) {
+    console.error('Error al formatear la fecha:', error)
+    return date
+  }
+}
 
 export default function Home({ posts }) {
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
-          </p>
+        {/* Banner con imagen a ancho completo */}
+        <div className="relative w-full bg-white dark:bg-gray-900">
+          <div className="w-full"> {/* Eliminado el max-w-7xl y padding para ancho completo */}
+            <div className="flex flex-col items-center justify-between">
+              {/* Imagen Principal a ancho completo */}
+              <div className="w-full">
+                <img
+                  src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?ixlib=rb-4.0.3"
+                  alt="Vintage Fashion"
+                  className="w-full h-[600px] object-cover" // Altura aumentada y object-cover
+                />
+              </div>
+              
+              {/* Contenedor para la barra y subtítulo */}
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                {/* Barra decorativa */}
+                <div className="mt-8 w-24 h-0.5 bg-emerald-600 mx-auto"></div>
+                
+                {/* Subtítulo */}
+                <p className="mt-8 text-center text-lg text-gray-500 dark:text-gray-400 font-light tracking-widest uppercase">
+                  Moda Vintage & Sostenible
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+        
+        {/* Resto del código permanece igual */}
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
@@ -56,10 +91,10 @@ export default function Home({ posts }) {
                       <div className="text-base font-medium leading-6">
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="text-emerald-600 hover:text-emerald-700 dark:hover:text-emerald-400"
                           aria-label={`Read more: "${title}"`}
                         >
-                          Read more &rarr;
+                          Leer más &rarr;
                         </Link>
                       </div>
                     </div>
@@ -74,16 +109,17 @@ export default function Home({ posts }) {
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-emerald-600 hover:text-emerald-700 dark:hover:text-emerald-400"
             aria-label="All posts"
           >
-            All Posts &rarr;
+            Todos los artículos &rarr;
           </Link>
         </div>
       )}
       {siteMetadata.newsletter?.provider && (
         <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
+          <NewsletterForm 
+          title="Suscríbete a nuestro newsletter" />
         </div>
       )}
     </>
